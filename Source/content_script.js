@@ -1,3 +1,4 @@
+var ignoretags = /script/i
 walk(document.body);
 
 function walk(node) 
@@ -22,7 +23,9 @@ function walk(node)
 			break;
 
 		case 3: // Text node
-			handleText(node);
+			if(!ignoretags.test(node.parentNode.tagName)) {
+				handleText(node);
+			}
 			break;
 	}
 }
