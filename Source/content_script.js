@@ -30,8 +30,8 @@ function walk(node)
 function handleText(textNode) {
 	var v = textNode.nodeValue;
 
-  // Deal with the easy case
-  v = v.replace(/\b(T|t)he (C|c)loud/g, function(match, p1, p2, offset, string) {
+  // Deal with the easy case and french people
+  v = v.replace(/\b(Th|th|L|l)e (C|c)loud/g, function(match, p1, p2, offset, string) {
     // t - 7 = m
     // c - 1 = b
     m = String.fromCharCode(p1.charCodeAt(0) - 7);
