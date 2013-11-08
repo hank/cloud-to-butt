@@ -25,6 +25,25 @@ var replace_sets = {
             ],
             'docaps': true,
         }]
+    },
+    'xkcd': {
+        'simple': {
+            'witnesses': 'these dudes I know',
+            'allegedly': 'kinda probably',
+            'new study': 'tumblr post',
+            'rebuild': 'avenge',
+            'space': 'spaaace',
+            'google glass': 'virtual boy',
+            'smartphone': 'pokédex',
+            'electric': 'atomic',
+            'senator': 'elf-lord',
+            'comic threads': 'stuffs',
+            'car': 'cat',
+            'election': 'eating contest',
+            'congressional leaders': 'river spirits',
+            'homeland security': 'homestar runner',
+            'could not be reached for comment': 'is guilty and everyone knows it',
+        }
     }
 };
 
@@ -35,6 +54,17 @@ function init_sets() {
     initcaps = /\b(\w)/g
     for(name in replace_sets) {
         matcher = replace_sets[name]; 
+        if(!matcher.regex) { matcher.regex = Array(); }
+
+        for(find in matcher.simple) {
+            newregex = new RegExp(find.replace(/\b(\w)/g,'($1)'),'ig');
+            matcher.regex.push({
+                find: newregex,
+                repl: matcher.simple[find],
+                docaps: true,
+            });
+        }
+
         for(idx in matcher.regex) {
             regex = matcher.regex[idx];
             if(regex.context) {
@@ -88,15 +118,16 @@ function handleText(textNode) {
                     v = v.replace(regex.find, function() {
                         matches = arguments.length - 3;
                         myrepl = '';
-                        for(i=0; i < matches; i++) {
+                        numcaps = regex.initialcaps.length;
+                        for(i=0; i < matches && (i+1)*2 < numcaps; i++) {
                             foundcap = regex.initialcaps[i*2+1];
                             myrepl += regex.initialcaps[i*2];
                             myrepl += (arguments[i+1].charCodeAt(0) < 96) ? foundcap.toUpperCase() : foundcap;
                         }
-                        if(regex.initialcaps.length > matches*2) {
-                            myrepl += regex.initialcaps[regex.initialcaps.length-1];
+                        if(numcaps > i*2) {
+                            myrepl += regex.initialcaps.slice(i*2).join('');
                         }
-                        console.log("Replaced " + arguments[0] + " with " + myrepl);
+                        //console.log("Replaced " + arguments[0] + " with " + myrepl);
                         return myrepl;
                     });
                 } else {
