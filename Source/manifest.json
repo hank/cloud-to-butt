@@ -1,8 +1,8 @@
 {
 	"manifest_version": 2,
-	"name": "Cloud To Butt Plus",
-	"version": "1.1",
-	"description": "Replaces the text 'the cloud' with 'my butt', as well as 'cloud' with 'butt' in certain contexts.",
+	"name": "Replace-o-matic",
+	"version": "1.2",
+	"description": "Replaces various texts with fun replacements.  Currently, 'the cloud' with 'my butt', as well as 'cloud' with 'butt' in certain contexts, and those from http://xkcd.com/1288.",
 	"content_scripts": 
 	[
 		{
