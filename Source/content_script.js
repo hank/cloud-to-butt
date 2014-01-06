@@ -62,3 +62,16 @@ function handleText(textNode) {
 }
 
 
+MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+var observer = new MutationObserver(function(mutations, observer) {
+    // fired when a mutation occurs
+    mutations.forEach(function(mutation) { walk(mutation.target); });
+});
+
+// Begin observing document.body for changes that need buttifying
+observer.observe(document.body, {
+  subtree: true,
+  attributes: false,
+  characterData: true,
+  childList: true
+});
