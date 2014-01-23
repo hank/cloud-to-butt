@@ -22,7 +22,7 @@ function walk(node)
 			break;
 
 		case 3: // Text node
-            if(node.parentElement.tagName.toLowerCase() != "script") {
+            if(node.parentElement.tagName.toLowerCase() !== "script" node.parentElement.tagName.toLowerCase() !== "textarea") {
                 handleText(node);
             }
 			break;
