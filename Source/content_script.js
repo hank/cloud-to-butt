@@ -1,4 +1,14 @@
-walk(document.body);
+walk(document.documentElement);
+
+var observer = new MutationObserver(function(mutations) {
+    mutations.reduce(function(acc, mutation){
+        Array.prototype.push.apply(acc, mutation.addedNodes);
+        return acc;
+    }, []).forEach(walk);
+});
+
+observer.observe(document.documentElement, { childList: true, subtree: true });
+
 
 function walk(node) 
 {
