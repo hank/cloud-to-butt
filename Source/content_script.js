@@ -47,6 +47,14 @@ function handleText(textNode) {
     b = String.fromCharCode(p2.charCodeAt(0) - 1);
     return b + "utt";
   });
+
+  // Deal with management
+  v = v.replace(/\b(M|m)anage/g, function(match, p1, offset, string) {
+    // c - 1 = b
+    b = String.fromCharCode(p1.charCodeAt(0));
+    return b + "angle";
+  });
+  
   // Get the corner cases
   if(v.match(/cloud/i)) {
     // If we're not talking about weather
