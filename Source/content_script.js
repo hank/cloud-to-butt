@@ -1,5 +1,7 @@
 walk(document.body);
 
+document.title = document.title.replace(/cloud/g,"butt")
+
 function walk(node) 
 {
 	// I stole this function from here:
